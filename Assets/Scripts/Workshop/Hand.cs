@@ -6,7 +6,7 @@ public class Hand : MonoBehaviour
 {
     public FlowManager manager;
 
-    private string GrabButton;
+    public string GrabButton;
 
     [SerializeField] private Grabbable hoveredObject;
     [SerializeField] private Grabbable grabbedObject;
@@ -26,14 +26,17 @@ public class Hand : MonoBehaviour
         {
             if (hoveredObject != null)
             {
+                
+                if(hoveredObject.name == "Jigsaw")
+                {
+                    manager.grabChainSaw();
+                }
+
                 grabbedObject = hoveredObject;
                 grabbedObject.OnGrabbed(transform);
                 hoveredObject = null;
 
-                if(grabbedObject.name == "Jigsaw")
-                {
-                    manager.grabChainSaw();
-                }
+                
             }
         }
 
@@ -41,13 +44,15 @@ public class Hand : MonoBehaviour
         {
             if (grabbedObject != null)
             {
-                grabbedObject.OnReleased();
-                grabbedObject = null;
+                
 
                 if (grabbedObject.name == "Jigsaw")
                 {
                     manager.releaseChainSaw();
                 }
+                
+                grabbedObject.OnReleased();
+                grabbedObject = null;
 
             }
         }

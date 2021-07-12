@@ -17,8 +17,8 @@ public class Grabbable : MonoBehaviour
     public void OnGrabbed(Transform hand)
     {
         transform.SetParent(hand);
-        body.isKinematic = false;
-        body.useGravity = true;
+        body.isKinematic = true;
+        body.useGravity = false;
     }
 
     public void OnReleased()
